@@ -1,0 +1,67 @@
+body{
+	color: white !important;
+    background-color: black !important;
+	font-family: monospace ,Arial, Helvetica, sans-serif !important;
+}
+
+header {
+	padding-top: 2%;
+	padding-bottom: 2%;
+	text-align: center;
+	justify-content: center;
+	color: rgb(255, 157, 0);
+	background: linear-gradient(aqua, black);
+}
+
+footer {
+	margin-top: 5%;
+	text-align: center;
+	justify-content: center;
+}
+
+h3 {
+	text-align: center;
+	justify-content: center;
+}
+
+table {
+	color: white !important;
+	text-align: center;
+}
+
+table thead tr th {
+	background-color: gray;
+}
+
+#watch-list {
+	height: 33vh;
+	overflow: scroll;
+}
+
+#watch-list thead th { 
+	position: sticky; top: 0; 
+}
+
+#currency-list {
+	max-height: 62vh;
+	overflow:auto;
+}
+
+li {
+	color: white;
+}
+
+#search-bar {
+	margin-top: 2%;
+}
+
+.search-result {
+	height: 5vh;
+	margin-top: 5%;
+	text-align: center;
+	justify-content: center;
+}
+
+footer a {
+	color: rgb(255, 157, 0);
+}

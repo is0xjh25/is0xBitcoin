@@ -1,88 +1,205 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>is0xjh25 Bitcoin</title>
+		<title>is0xBitcoin Price</title>
 		<meta charset="UTF-8">
-		<meta name="description" content="Yun-Chi Hsiao's Currency Converter">
+		<meta name="description" content="Yun-Chi Hsiao's Live Bitcoin Price">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="index.css">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://kit.fontawesome.com/a31db65717.js" crossorigin="anonymous"></script>
 		<script type="text/javascript" src="index.js"></script>
 	</head>
 	<body>
 		<header>
-			<h1>is0xjh25 Bitcoin</h1>
+			<h1>₿ Bitcoin Price ₿</h1>
 		</header>
 		<div class="container">
 			<div class="row">
 				<div class="col-10">
-					<h3>Watch List</h3>
-					<table class="table">
-						<thead>
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Currency</th>
-							<th scope="col">Buy</th>
-							<th scope="col">Sell</th>
-						</tr>
-						</thead>
-						<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>Otto</td>
-							<td>@mdo</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Jacob</td>
-							<td>Thornton</td>
-							<td>@fat</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>@twitter</td>
-						</tr>
-						</tbody>
-					</table>
-					<div class="col-6">
-						<h3>BUY & SELL</h3>
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<button class="btn btn-primary" type="button">Search</button>
+					<h3>WATCH LIST</h3>
+					<p>
+						<button type="button" class="button" onclick="download()">
+							<i class="fa fa-refresh fa-lg" aria-hidden="true"></i>
+						</button>
+						Last updated:
+					</p>
+					<div id="watch-list">
+						<table class="table">
+							<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Currency</th>
+								<th scope="col">Buy</th>
+								<th scope="col">Sell</th>
+								<th scope="col">x</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<th scope="row">1</th>
+								<td>Mark</td>
+								<td>Otto</td>
+								<td>@mdo</td>
+								<td>
+									<button type="button" class="button" onclick="download()">
+										<i class="far fa-times-circle"></i>
+									</button>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">1</th>
+								<td>Mark</td>
+								<td>Otto</td>
+								<td>@mdo</td>
+								<td>
+									<button type="button" class="button" onclick="download()">
+										<i class="far fa-times-circle"></i>
+									</button>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">1</th>
+								<td>Mark</td>
+								<td>Otto</td>
+								<td>@mdo</td>
+								<td>
+									<button type="button" class="button" onclick="download()">
+										<i class="far fa-times-circle"></i>
+									</button>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">1</th>
+								<td>Mark</td>
+								<td>Otto</td>
+								<td>@mdo</td>
+								<td>
+									<button type="button" class="button" onclick="download()">
+										<i class="far fa-times-circle"></i>
+									</button>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">2</th>
+								<td>Jacob</td>
+								<td>Thornton</td>
+								<td>@fat</td>
+								<td>
+									<button type="button" class="button" onclick="download()">
+										<i class="far fa-times-circle"></i>
+									</button>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">3</th>
+								<td>Larry</td>
+								<td>the Bird</td>
+								<td>@twitter</td>
+								<td>
+									<button type="button" class="button" onclick="download()">
+										<i class="far fa-times-circle"></i>
+									</button>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="row" id="search-bar">
+						<div class="col-6">
+							<h3>BUY & SELL</h3>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary" type="button">Search</button>
+								</div>
+								<select class="custom-select">
+									<option selected>Select €£$¥</option>
+								</select>
+								<select class="custom-select">
+									<option selected>Action</option>
+									<option value="buy">Buy</option>
+									<option value="sell">Sell</option>
+								</select>
 							</div>
-							<select class="custom-select">
-								<option selected>Select Currency</option>
-							</select>
-							<select class="custom-select">
-								<option selected>Buy / Sell</option>
-								<option value="buy">Buy</option>
-								<option value="sell">Sell</option>
-							</select>
+							<div class="search-result">
+								2021-12-01 10:30<br/>
+								Buy: 50000 USD => 1 Bitcoin
+							</div>
+						</div>
+						<div class="col-6">
+							<h3>SPOT</h3>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary" type="button">Search</button>
+								</div>
+								<select class="custom-select">
+									<option selected>Select €£$¥</option>
+								</select>
+								<input type="text" class="form-control" placeholder="YYYY-MM-DD">
+							</div>
+							<div class="search-result">
+								2021-11-30<br/>
+								Spot: 566611 USD  
+							</div>
 						</div>
 					</div>
-					 <div class="col-6">
-					  <h3>SPOT</h3>
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<button class="btn btn-primary" type="button">Search</button>
-							</div>
-							<select class="custom-select">
-								<option selected>Select Currency</option>
-							</select>
-							<input type="text" class="form-control" placeholder="YYYY-MM-DD">
-						</div>
-					</div>
-			  	</div>
+				</div>
 				<div class="col-2">
-					<h3>Currency</h3>
-				</div>	
+					<h3>CURRENCY</h3>
+					<div id="currency-list">
+						<ul>
+							<li>
+								AUD
+								<button type="button" class="button" onclick="download()">
+									<i class="fas fa-plus-circle fa-xs"></i>
+								</button>
+							</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+							<li>AUD</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 		<footer>
-			<h1>END</h1>
+			<p>Made by  <a href="https://is0xjh25.github.io" target="_blank">is0xjh25</a> · Information is provided by <a href="https://developers.coinbase.com" target="_blank">Coinbase</a></p>
 		</footer>
 	</body>
 </html>
