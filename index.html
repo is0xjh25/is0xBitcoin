@@ -106,40 +106,36 @@
 						</table>
 					</div>
 					<div class="row" id="search-bar">
-						<div class="col-6">
+						<div class="col-6" id="buy-sell">
 							<h3>BUY & SELL</h3>
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<button class="btn btn-primary" type="button">Search</button>
 								</div>
-								<select class="custom-select">
-									<option selected>Select €£$¥</option>
+								<select class="custom-select currency-selector">
+									<option selected>select €£$¥</option>
 								</select>
-								<select class="custom-select">
-									<option selected>Action</option>
+								<select class="custom-select action-selector" autocomplete="off"> 
+									<option value="action" selected>Action</option>
 									<option value="buy">Buy</option>
 									<option value="sell">Sell</option>
 								</select>
 							</div>
-							<div class="search-result">
-								2021-12-01 10:30<br/>
-								Buy: 50000 USD => 1 Bitcoin
+							<div class="search-result">								
 							</div>
 						</div>
-						<div class="col-6">
+						<div class="col-6" id="spot">
 							<h3>SPOT</h3>
 							<div class="input-group">
 								<div class="input-group-prepend">
 									<button class="btn btn-primary" type="button">Search</button>
 								</div>
-								<select class="custom-select">
-									<option selected>Select €£$¥</option>
+								<select class="custom-select currency-selector">
+									<option selected>select €£$¥</option>
 								</select>
-								<input type="text" class="form-control" placeholder="YYYY-MM-DD">
+								<input type="text" class="form-control" placeholder="YYYY-MM-DD" autocomplete="off">
 							</div>
 							<div class="search-result">
-								2021-11-30<br/>
-								Spot: 566611 USD  
 							</div>
 						</div>
 					</div>
