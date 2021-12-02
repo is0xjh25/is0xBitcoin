@@ -12,8 +12,18 @@ function getAllCurrency() {
 	}) 
 }
 
-function saveCurrency(obj) {
-	return fetch(`${LOCAL_URL}/currency-list`, {
+/* Member Section */
+function localGetWatchList() {
+	return fetch(`${LOCAL_URL}/watch-list`)
+	.then(res => {
+		return res.json();
+	}).then(json => {
+		return json;
+	});
+}
+
+function localSaveWatchList(obj) {
+	return fetch(`${LOCAL_URL}/watch-list`, {
 		method: 'POST',
 		headers: {
 			"Content-Type": "application/json",
@@ -23,7 +33,55 @@ function saveCurrency(obj) {
 	})
 }
 
-/* Member Section */
+function localRemoveWatchList(id) {
+	return fetch(`${LOCAL_URL}/watch-list/${id}`, {
+		method: 'DELETE'
+	})
+}
+
+function refreshWatchList() {
+	let table = document.querySelector('#watch-list tbody');
+	localGetWatchList().then(wArr => {
+		if (wArr.length === 0) {
+			table.innerHTML = "";
+			let warning = document.createElement('p');
+			warning.innerHTML = `<p style="color:yellow; text-align:center;">There is no currency in your WATCH LIST!</p>`
+			document.querySelector("#watch-list > .search-result").innerHTML = "";
+			document.querySelector("#watch-list > .search-result").appendChild(warning);
+		} else {
+			table.innerHTML = "";
+			wArr.forEach(w => {
+				let col = document.createElement('tr');
+				Promise.all([buy(w.id), sell(w.id)]).then(res => {
+					col.innerHTML =
+						`<th scope="row">${w.id}</th>
+						<td>${w.name}</td>
+						<td style="color:green">${res[0]}</td>
+						<td style="color:red">${res[1]}</td>
+						<td>
+							<button type="button" class="button" onclick="download()">
+								<i class="far fa-times-circle"></i>
+							</button>
+						</td>`;
+					table.appendChild(col);
+				}).catch(_ => {
+					col.innerHTML =
+						`<th scope="row">${w.id}</th>
+						<td>${w.name}</td>
+						<td style="color:green">Unexpected Error</td>
+						<td style="color:red">Unexpected Error</td>
+						<td>
+							<button type="button" class="button" onclick="download()">
+								<i class="far fa-times-circle"></i>
+							</button>
+						</td>`;
+					table.appendChild(col);
+				})
+			})
+		}
+	})
+	document.querySelector('#updated-time').innerHTML = `Last updated: ${new Date().toLocaleTimeString()}`;
+}
 
 
 /* User Section */
@@ -55,7 +113,7 @@ function spot(currency, date=new Date().toISOString().split('T')[0]) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-	
+	refreshWatchList();
 	/* Get All Currencies */
 	let currencySelector = document.querySelectorAll('.currency-selector');
 	let currencyList = document.querySelector('#currency-list');
@@ -96,13 +154,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		} else {
 			if (action === "buy") {
 				buy(currency).then(res => {
-					buySellDiv.querySelector('.search-result').innerHTML = `<p>${new Date().toLocaleTimeString()}<br/>Buy: ${res} ${currency} => 1 ₿</p>`;
+					buySellDiv.querySelector('.search-result').innerHTML = `<p>${new Date().toLocaleTimeString()}<br/>Buy: ${res} ${currency} => 1₿</p>`;
 				}).catch(_ => {
 					buySellDiv.querySelector('.search-result').innerHTML = `<p style="color:red">Unexpected Error</p>`;
 				})
 			} else if (action === "sell") {
 				sell(currency).then(res => {
-					buySellDiv.querySelector('.search-result').innerHTML = `<p>${new Date().toLocaleTimeString()}<br/>Sell: 1 ₿ => ${res} ${currency}</p>`;
+					buySellDiv.querySelector('.search-result').innerHTML = `<p>${new Date().toLocaleTimeString()}<br/>Sell: 1₿ => ${res} ${currency}</p>`;
 				}).catch(_ => {
 					buySellDiv.querySelector('.search-result').innerHTML = `<p style="color:red">Unexpected Error</p>`;
 				})
