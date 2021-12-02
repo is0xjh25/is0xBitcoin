@@ -55,11 +55,15 @@ function spot(currency, date=new Date().toISOString().split('T')[0]) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-
-	let currencySelector = document.querySelectorAll('.currency-selector')
-
+	
+	/* Get All Currencies */
+	let currencySelector = document.querySelectorAll('.currency-selector');
+	let currencyList = document.querySelector('#currency-list');
 	getAllCurrency().then(cArr => {
 		cArr.forEach(c => {
+			let currency = document.createElement('li');
+			currency.innerHTML = `${c.id} <button type="button" class="button""><i class="fas fa-plus-circle fa"></i></button>`;
+			currencyList.querySelector('ul').appendChild(currency);
 			currencySelector.forEach(cs => {
 				let option = document.createElement('option');
 				option.value = c.id;
