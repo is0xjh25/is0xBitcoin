@@ -39,6 +39,27 @@ function localRemoveWatchList(id) {
 	})
 }
 
+function addCurrency() {
+	let value = event.target.parentNode.value.split("!");
+	let id = value[0];
+	let name = value[1];
+	localSaveWatchList({id, name}).then(_ => {
+		refreshWatchList();
+		refreshCurrencyList();
+	}).catch(_ => {
+		alert("Unexpected Error");
+	});
+}
+
+function removeCurrency() {
+	localRemoveWatchList(event.target.parentNode.value).then(_ => {
+		refreshWatchList();
+		refreshCurrencyList();
+	}).catch(_ => {
+		alert("Unexpected Error");
+	});
+}
+
 function refreshWatchList() {
 	let table = document.querySelector('#watch-list tbody');
 	localGetWatchList().then(wArr => {
@@ -59,11 +80,10 @@ function refreshWatchList() {
 						<td style="color:green">${res[0]}</td>
 						<td style="color:red">${res[1]}</td>
 						<td>
-							<button type="button" class="button" onclick="download()">
+							<button type="button" class="button" value=${w.id} onclick="removeCurrency()">
 								<i class="far fa-times-circle"></i>
 							</button>
 						</td>`;
-					table.appendChild(col);
 				}).catch(_ => {
 					col.innerHTML =
 						`<th scope="row">${w.id}</th>
@@ -71,18 +91,38 @@ function refreshWatchList() {
 						<td style="color:green">Unexpected Error</td>
 						<td style="color:red">Unexpected Error</td>
 						<td>
-							<button type="button" class="button" onclick="download()">
+							<button type="button" class="button" value=${w.id} onclick="removeCurrency()">
 								<i class="far fa-times-circle"></i>
 							</button>
 						</td>`;
-					table.appendChild(col);
 				})
+				table.appendChild(col);
 			})
 		}
 	})
+
+	// update time
 	document.querySelector('#updated-time').innerHTML = `Last updated: ${new Date().toLocaleTimeString()}`;
 }
 
+function refreshCurrencyList() {
+	let currencyList = document.querySelector('#currency-list');
+	getAllCurrency().then(cArr => {
+		cArr.forEach(c => {
+			let currency = document.createElement('li');
+			localGetWatchList().then(wArr => {
+				wArr.some(val => {
+					return val.id.includes(c.id);
+				}) ?
+				currency.innerHTML = `${c.id}` :
+				currency.innerHTML = `${c.id} <button valtype="button" class="button" value="${c.id}!${c.name}" onclick="addCurrency()"><i class="fas fa-plus-circle fa"></i></button>`;
+			}).catch(_ => {
+				alert("Unexpected Error");
+			});
+			currencyList.querySelector('ul').appendChild(currency);
+		})
+	})
+}
 
 /* User Section */
 function buy(currency) {
@@ -113,15 +153,14 @@ function spot(currency, date=new Date().toISOString().split('T')[0]) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+	/* Get Watch List and Currency List */
 	refreshWatchList();
-	/* Get All Currencies */
+	refreshCurrencyList();
+
+	/* Currency Selector */
 	let currencySelector = document.querySelectorAll('.currency-selector');
-	let currencyList = document.querySelector('#currency-list');
 	getAllCurrency().then(cArr => {
 		cArr.forEach(c => {
-			let currency = document.createElement('li');
-			currency.innerHTML = `${c.id} <button type="button" class="button""><i class="fas fa-plus-circle fa"></i></button>`;
-			currencyList.querySelector('ul').appendChild(currency);
 			currencySelector.forEach(cs => {
 				let option = document.createElement('option');
 				option.value = c.id;
@@ -130,7 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			})
 		})
 	})
-
 	/* Buy/Sell Search */
 	let buySellDiv = document.querySelector('#buy-sell');
 
