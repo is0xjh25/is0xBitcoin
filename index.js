@@ -151,6 +151,9 @@ function spot(currency, date=new Date().toISOString().split('T')[0]) {
 document.addEventListener('DOMContentLoaded', () => {
 	/* Get Watch List and Currency List */
 	refreshWatchList();
+	setInterval(function() {
+		refreshWatchList();
+	}, 60000);
 	refreshCurrencyList();
 
 	/* Currency Selector */

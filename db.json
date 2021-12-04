@@ -1,16 +1,3 @@
 {
-  "watch-list": [
-    {
-      "id": "ARS",
-      "name": "Argentine Peso"
-    },
-    {
-      "id": "ALL",
-      "name": "Albanian Lek"
-    },
-    {
-      "id": "AOA",
-      "name": "Angolan Kwanza"
-    }
-  ]
+  "watch-list": []
 }
