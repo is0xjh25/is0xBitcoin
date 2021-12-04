@@ -65,3 +65,14 @@ li {
 footer a {
 	color: rgb(255, 157, 0);
 }
+
+#watch-list button:hover {
+	color: rgb(255, 157, 0);
+}
+
+#currency-list li :hover{
+	color: rgb(255, 157, 0);
+	font-size: 20px;
+}
+
+

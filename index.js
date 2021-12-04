@@ -22,14 +22,14 @@ function localGetWatchList() {
 	});
 }
 
-function localSaveWatchList(obj) {
+function localSaveWatchList(id, name) {
 	return fetch(`${LOCAL_URL}/watch-list`, {
 		method: 'POST',
 		headers: {
 			"Content-Type": "application/json",
 			"Accept": "application/json",
 		},
-		body: JSON.stringify(obj)
+		body: JSON.stringify({id, name})
 	})
 }
 
@@ -37,27 +37,6 @@ function localRemoveWatchList(id) {
 	return fetch(`${LOCAL_URL}/watch-list/${id}`, {
 		method: 'DELETE'
 	})
-}
-
-function addCurrency() {
-	let value = event.target.parentNode.value.split("!");
-	let id = value[0];
-	let name = value[1];
-	localSaveWatchList({id, name}).then(_ => {
-		refreshWatchList();
-		refreshCurrencyList();
-	}).catch(_ => {
-		alert("Unexpected Error");
-	});
-}
-
-function removeCurrency() {
-	localRemoveWatchList(event.target.parentNode.value).then(_ => {
-		refreshWatchList();
-		refreshCurrencyList();
-	}).catch(_ => {
-		alert("Unexpected Error");
-	});
 }
 
 function refreshWatchList() {
@@ -80,7 +59,7 @@ function refreshWatchList() {
 						<td style="color:green">${res[0]}</td>
 						<td style="color:red">${res[1]}</td>
 						<td>
-							<button type="button" class="button" value=${w.id} onclick="removeCurrency()">
+							<button type="button" class="button">
 								<i class="far fa-times-circle"></i>
 							</button>
 						</td>`;
@@ -91,10 +70,19 @@ function refreshWatchList() {
 						<td style="color:green">Unexpected Error</td>
 						<td style="color:red">Unexpected Error</td>
 						<td>
-							<button type="button" class="button" value=${w.id} onclick="removeCurrency()">
+							<button type="button" class="button">
 								<i class="far fa-times-circle"></i>
 							</button>
 						</td>`;
+				}).finally(_ => {
+					col.querySelector('button').addEventListener('click', () => {
+						localRemoveWatchList(w.id).then(_ => {
+							refreshWatchList();
+							refreshCurrencyList();
+						}).catch(_ => {
+							alert("Unexpected Error");
+						});
+					})
 				})
 				table.appendChild(col);
 			})
@@ -111,11 +99,19 @@ function refreshCurrencyList() {
 		cArr.forEach(c => {
 			let currency = document.createElement('li');
 			localGetWatchList().then(wArr => {
-				wArr.some(val => {
-					return val.id.includes(c.id);
-				}) ?
-				currency.innerHTML = `${c.id}` :
-				currency.innerHTML = `${c.id} <button valtype="button" class="button" value="${c.id}!${c.name}" onclick="addCurrency()"><i class="fas fa-plus-circle fa"></i></button>`;
+				if (wArr.some(val => {return val.id.includes(c.id);})) {
+					currency.innerHTML = `${c.id}` 
+				} else {
+					currency.innerHTML = `<span>${c.id}<span> <button type="button" class="button"><i class="fas fa-plus-circle fa"></i></button>`;
+					currency.querySelector('button').addEventListener('click', () => {
+						localSaveWatchList(`${c.id}`, `${c.name}`).then(_ => {
+							refreshWatchList();
+							refreshCurrencyList();
+						}).catch(_ => {
+							alert("Unexpected Error");
+						});
+					});
+				}
 			}).catch(_ => {
 				alert("Unexpected Error");
 			});
@@ -169,6 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			})
 		})
 	})
+
 	/* Buy/Sell Search */
 	let buySellDiv = document.querySelector('#buy-sell');
 
