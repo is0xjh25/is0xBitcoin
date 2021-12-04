@@ -236,20 +236,3 @@ function isValidDate(dateString) {
 	if(!dNum && dNum !== 0) return false; // NaN value, Invalid date
 	return d.toISOString().slice(0,10) === dateString;
 }
-
-function handleClick2() {
-	return fetch("http://localhost:3000/posts/1", {
-		method: 'PATCH',
-		headers: {
-			"Content-Type": "application/json",
-			"Accept": "application/json"
-		},
-		body: JSON.stringify({
-			test: "test",
-			test2: "123"
-		})
-	})
-	.then(res => {
-		return res.json();
-	}).then(json => console.log(json));
-}
