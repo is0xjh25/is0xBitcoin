@@ -52,28 +52,31 @@ function refreshWatchList() {
 			table.innerHTML = "";
 			wArr.forEach(w => {
 				let col = document.createElement('tr');
+				col.setAttribute('id', `${w.id}`);
 				Promise.all([buy(w.id), sell(w.id)]).then(res => {
 					col.innerHTML =
-						`<th scope="row">${w.id}</th>
-						<td>${w.name}</td>
-						<td style="color:green">${res[0]}</td>
-						<td style="color:red">${res[1]}</td>
-						<td>
-							<button type="button" class="button">
-								<i class="far fa-times-circle"></i>
-							</button>
-						</td>`;
+							`<th scope="row">${w.id}</th>
+								<td>${w.name}</td>
+								<td class="watch-list-buy" style="color:green">${res[0]}</td>
+								<td class="watch-list-sell" style="color:red">${res[1]}</td>
+								<td>
+									<button type="button" class="button">
+										<i class="far fa-times-circle"></i>
+									</button>
+							</td>`
 				}).catch(_ => {
 					col.innerHTML =
-						`<th scope="row">${w.id}</th>
-						<td>${w.name}</td>
-						<td style="color:green">Unexpected Error</td>
-						<td style="color:red">Unexpected Error</td>
-						<td>
-							<button type="button" class="button">
-								<i class="far fa-times-circle"></i>
-							</button>
-						</td>`;
+							`<tr id=${w.id}>
+								<th scope="row">${w.id}</th>
+								<td>${w.name}</td>
+								<td class="watch-list-buy" style="color:green">Unexpected Error</td>
+								<td class="watch-list-sell" style="color:red">Unexpected Error</td>
+								<td>
+									<button type="button" class="button">
+										<i class="far fa-times-circle"></i>
+									</button>
+								</td>
+							</tr>`
 				}).finally(_ => {
 					col.querySelector('button').addEventListener('click', () => {
 						localRemoveWatchList(w.id).then(_ => {
@@ -120,6 +123,19 @@ function refreshCurrencyList() {
 	})
 }
 
+function updateWatchList() {
+	const watchList = document.querySelectorAll('tbody tr');
+	watchList.forEach(w => {
+		Promise.all([buy(w.id), sell(w.id)]).then(res => {
+			w.querySelector('.watch-list-buy').innerText = `${res[0]}`;
+			w.querySelector('.watch-list-sell').innerText = `${res[1]}`;
+		}).catch(_ => {
+			w.querySelector('.watch-list-buy').innerText = "Unexpected Error";
+			w.querySelector('.watch-list-sell').innerText = "Unexpected Error";
+		})
+	})
+}
+
 /* User Section */
 function buy(currency) {
 	return fetch(`${API_URL}/prices/BTC-${currency}/buy`)
@@ -152,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	/* Get Watch List and Currency List */
 	refreshWatchList();
 	setInterval(function() {
-		refreshWatchList();
+		updateWatchList();
 	}, 60000);
 	refreshCurrencyList();
 
