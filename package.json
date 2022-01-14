@@ -1,0 +1,23 @@
+{
+  "name": "is0xbitcoin",
+  "version": "1.0.0",
+  "description": "## Table of Content * [About the Project](#about-the-project) * [Getting Started](#getting-started) * [Usage](#usage) * [Support](#support)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npx json-server --watch --no-cors db.json\" \"live-server\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/is0xjh25/javascript-project-mode.git"
+  },
+  "author": "Yun-Chi Hsiao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/is0xjh25/javascript-project-mode/issues"
+  },
+  "homepage": "https://github.com/is0xjh25/javascript-project-mode#readme",
+  "dependencies": {
+    "live-server": "^1.2.1"
+  }
+}
