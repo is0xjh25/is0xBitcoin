@@ -10,9 +10,8 @@
 The project is programmed to get the lastest bitcoin price for buying and selling. It contains two search bars which allow visitors to learn the bitcoin price for buying, selling and spoting with **164 currencies**. Furthermore, _is0xBitcoin_ supports a feature of managing a watch list (which data is saved in local), therefore, the users can easliy look up their highlighted currencies.
 
 ## Getting Started
-1. Initialize json-server (via db.json)
-  > Type in terminal: `json-server --watch db`
-2. Open live-sever via _Visual Studio Code_
+Initialize the json-server and start the live-server
+  > Type in terminal: `npm start`
 
 ## Usage
 - **Add** a currecny to the watch list
