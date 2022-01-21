@@ -10,9 +10,15 @@
 The project is programmed to get the lastest bitcoin price for buying and selling. It contains two search bars which allow visitors to learn the bitcoin price for buying, selling and spoting with **164 currencies**. Furthermore, _is0xBitcoin_ supports a feature of managing a watch list (which data is saved in local), therefore, the users can easliy look up their highlighted currencies.
 
 ## Getting Started
+Install node_modules via package.json
+  > Type in terminal: `npm install`
 Initialize the json-server and start the live-server
   > Type in terminal: `npm start`
-
+Potential errors and warning
+  - "concurrently not found"
+  > Type in terminal: `npm install concurrently`
+  - Please use Safari/Firefox browser. Chrome will be supported recently. 
+  
 ## Usage
 - **Add** a currecny to the watch list
 - **Remove** a currecny from the watch list
