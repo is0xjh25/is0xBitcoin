@@ -4,6 +4,7 @@
 * [About the Project](#about-the-project)
 * [Getting Started](#getting-started)
 * [Usage](#usage)
+* [Demo](#demo)
 * [Support](#support)
 
 ## About the Project
@@ -25,6 +26,22 @@ The project is programmed to get the lastest bitcoin price for buying and sellin
 - **Update** lastest buying and selling price with the currencies showed on the watch list
 - **Search** lastest buying and selling price with various currencies
 - **Search** spot price with the choosen date and various currencies
+
+## Demo
+- **Main Page**
+<p align="center">
+  <img alt="Main Page" src="demo/main.png" width="500" >
+</p>
+
+- **Watch List**
+<p align="center">
+  <img alt="Watch List" src="demo/watch-list.gif" width="500" >
+</p>
+
+- **Search Bar**
+<p align="center">
+  <img alt="Search Bar" src="demo/search-bar.gif" width="500" >
+</p>
 
 ## Support
 The bitcoin data is provided by _[Coinbase](https://developers.coinbase.com/)_.
