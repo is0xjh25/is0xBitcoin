@@ -5,7 +5,7 @@
 * [Getting Started](#getting-started)
 * [Usage](#usage)
 * [Demo](#demo)
-* [Support](#support)
+* [Developed by and Support](#developed-by-and-support)
 
 ## About the Project
 The project is programmed to get the lastest bitcoin price for buying and selling. It contains two search bars which allow visitors to learn the bitcoin price for buying, selling and spoting with **164 currencies**. Furthermore, _is0xBitcoin_ supports a feature of managing a watch list (which data is saved in local), therefore, the users can easliy look up their highlighted currencies.
@@ -43,8 +43,9 @@ The project is programmed to get the lastest bitcoin price for buying and sellin
   <img alt="Search Bar" src="demo/search-bar.gif" width="500" >
 </p>
 
-## Support
-The bitcoin data is provided by _[Coinbase](https://developers.coinbase.com/)_.
+## Developed by and Support
+- The application is developed by _[is0xjh25 (Yun-Chi Hsiao)](https://is0xjh25.github.io)_
+- The bitcoin data is provided by _[Coinbase](https://developers.coinbase.com/)_
 <br/>
 <p align="left">
   <img alt="Favicon" src="./favicon_io.png" width="250" >
