@@ -15,6 +15,8 @@ The project is programmed to get the lastest bitcoin price for buying and sellin
   > Type in terminal: `npm install`
 - Initialize the json-server and start the live-server
   > Type in terminal: `npm start`
+- View in your browser
+  > Go to `http://localhost:3000`
 - Potential errors and warning
   - "concurrently not found"
   > Type in terminal: `npm install concurrently`
